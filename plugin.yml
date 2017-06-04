@@ -1,0 +1,43 @@
+name: PKits
+main: Driesboy\PKits\Main
+version: 1.0
+api: [3.0.0-ALPHA4, 3.0.0-ALPHA5]
+auther: Driesboy
+description: "PvP Extendsion"
+commands:
+  blind:
+    description: blind
+    permission: kit.command.blind
+  deathbringer:
+    description: deathbringer
+    permission: kit.command.deathbringer
+  lifesteal:
+    description: lifesteal
+    permission: kit.command.lifesteal
+  frozen:
+    description: frozen
+    permission: kit.command.frozen
+  gears:
+    description: gears
+    permission: kit.command.gears
+  springs:
+    description: springs
+    permission: kit.command.springs
+  diamondkit:
+    description: diamondkit
+    permission: rank.diamond
+  goldkit:
+    description: goldkit
+    permission: rank.gold
+  lapiskit:
+    description: lapiskit
+    permission: rank.lapis   
+
+permissions:
+  kit:
+    default: true
+    description: Allows using all the FKits things
+    children:
+     kit.command:
+      default: true
+      description: Allows using all the FKits commands
