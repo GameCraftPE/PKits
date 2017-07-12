@@ -2,179 +2,64 @@
 /*
 License Text
 */
-namespace Driesboy\FKits;
+namespace Driesboy\PKits;
 
 use pocketmine\command\Command;
-use pocketmine\command\CommandSender;
+use pocketmine\command\Commandplayer;
+use pocketmine\event\player\PlayerRespawnEvent;
 use pocketmine\plugin\PluginBase;
 use pocketmine\item\Item;
+use pocketmine\event\Listener;
 use onebone\economyapi\EconomyAPI;
 
-class Main extends PluginBase {
+class Main extends PluginBase implements Listener{
 
 	public function onEnable() {
-		//codes
+		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
-	public function onCommand(CommandSender $sender, Command $command, $lable, array $args) {
-		$ce = $this->getServer()->getPluginManager()->getPlugin("PiggyCustomEnchants");
-		switch(strtolower($command->getName())){
-			case "blind":
-			if ($r = EconomyAPI::getInstance()->reduceMoney($sender, 150)) {
-				$item = Item::get(Item::DIAMOND_SWORD);
-				$enchant = $ce->addEnchantment($item, "blind", 1, $sender, null, null, true, false);
-				$sender->getInventory()->addItem($enchant);
-			}else{
-				switch ($r) {
-					case EconomyAPI::RET_INVALID:
-					# Invalid $amount
-					break;
-					case EconomyAPI::RET_CANCELLED:
-					# Transaction was cancelled for some reason :/
-					break;
-					case EconomyAPI::RET_NO_ACCOUNT:
-					# Player wasn't recognised by EconomyAPI aka. not registered
-					break;
-				}
-			}
-			break;
-			case "deathbringer":
-			if ($r = EconomyAPI::getInstance()->reduceMoney($sender, 150)) {
-				$item = Item::get(Item::DIAMOND_SWORD);
-				$enchant = $ce->addEnchantment($item, "deathbringer", 1, $sender, null, null, true, false);
-				$sender->getInventory()->addItem($enchant);
-			}else{
-				switch ($r) {
-					case EconomyAPI::RET_INVALID:
-					# Invalid $amount
-					break;
-					case EconomyAPI::RET_CANCELLED:
-					# Transaction was cancelled for some reason :/
-					break;
-					case EconomyAPI::RET_NO_ACCOUNT:
-					# Player wasn't recognised by EconomyAPI aka. not registered
-					break;
-				}
-			}
-			break;
-			case "lifesteal":
-				if ($r = EconomyAPI::getInstance()->reduceMoney($sender, 150)) {
-					$item = Item::get(Item::DIAMOND_SWORD);
-					$enchant = $ce->addEnchantment($item, "lifesteal", 1, $sender, null, null, true, false);
-					$sender->getInventory()->addItem($enchant);
-				}else{
-					switch ($r) {
-						case EconomyAPI::RET_INVALID:
-						# Invalid $amount
-						break;
-						case EconomyAPI::RET_CANCELLED:
-						# Transaction was cancelled for some reason :/
-						break;
-						case EconomyAPI::RET_NO_ACCOUNT:
-						# Player wasn't recognised by EconomyAPI aka. not registered
-						break;
-					}
-				}
-				break;
-			case "frozen":
-				if ($r = EconomyAPI::getInstance()->reduceMoney($sender, 150)) {
-					$item = Item::get(Item::DIAMOND_CHESTPLATE);
-					$enchant = $ce->addEnchantment($item, "frozen", 1, $sender, null, null, true, false);
-					$sender->getInventory()->addItem($enchant);
-				}else{
-					switch ($r) {
-						case EconomyAPI::RET_INVALID:
-						# Invalid $amount
-						break;
-						case EconomyAPI::RET_CANCELLED:
-						# Transaction was cancelled for some reason :/
-						break;
-						case EconomyAPI::RET_NO_ACCOUNT:
-						# Player wasn't recognised by EconomyAPI aka. not registered
-						break;
-					}
-				}
-				break;
-				case "gears":
-				if ($r = EconomyAPI::getInstance()->reduceMoney($sender, 150)) {
-					$item = Item::get(Item::DIAMOND_BOOTS);
-					$enchant = $ce->addEnchantment($item, "gears", 1, $sender, null, null, true, false);
-					$sender->getInventory()->addItem($enchant);
-				}else{
-					switch ($r) {
-						case EconomyAPI::RET_INVALID:
-						# Invalid $amount
-						break;
-						case EconomyAPI::RET_CANCELLED:
-						# Transaction was cancelled for some reason :/
-						break;
-						case EconomyAPI::RET_NO_ACCOUNT:
-						# Player wasn't recognised by EconomyAPI aka. not registered
-						break;
-					}
-				}
-				break;
-				case "springs":
-				if ($r = EconomyAPI::getInstance()->reduceMoney($sender, 150)) {
-					$item = Item::get(Item::DIAMOND_BOOTS);
-					$enchant = $ce->addEnchantment($item, "springs", 1, $sender, null, null, true, false);
-					$sender->getInventory()->addItem($enchant);
-				}else{
-					switch ($r) {
-						case EconomyAPI::RET_INVALID:
-						# Invalid $amount
-						break;
-						case EconomyAPI::RET_CANCELLED:
-						# Transaction was cancelled for some reason :/
-						break;
-						case EconomyAPI::RET_NO_ACCOUNT:
-						# Player wasn't recognised by EconomyAPI aka. not registered
-						break;
-					}
-				}
-				break;
-				case "DiamondKit":
-				if ($sender->hasPermission("rank.diamond")) {
-					$item = Item::get(Item::DIAMOND_HELMET);
-					$sender->getInventory()->addItem($item);
-					$item = Item::get(Item::DIAMOND_CHESTPLATE);
-					$sender->getInventory()->addItem($item);
-					$item = Item::get(Item::DIAMOND_LEGGINGS);
-					$sender->getInventory()->addItem($item);
-					$item = Item::get(Item::DIAMOND_BOOTS);
-					$sender->getInventory()->addItem($item);
-				}else{
-					$sender->sendMessage("This kit is only for players with Diamond Rank!");
-				}
-				break;
-				case "GoldKit":
-				if ($sender->hasPermission("rank.gold")) {
-					$item = Item::get(Item::IRON_HELMET);
-					$sender->getInventory()->addItem($item);
-					$item = Item::get(Item::IRON_CHESTPLATE);
-					$sender->getInventory()->addItem($item);
-					$item = Item::get(Item::IRON_LEGGINGS);
-					$sender->getInventory()->addItem($item);
-					$item = Item::get(Item::IRON_BOOTS);
-					$sender->getInventory()->addItem($item);
-				}else{
-					$sender->sendMessage("This kit is only for players with Gold Rank!");
-				}
-				break;
-				case "LapisKit":
-				if ($sender->hasPermission("rank.lapis")) {
-					$item = Item::get(Item::CHAIN_HELMET);
-					$sender->getInventory()->addItem($item);
-					$item = Item::get(Item::CHAIN_CHESTPLATE);
-					$sender->getInventory()->addItem($item);
-					$item = Item::get(Item::CHAIN_LEGGINGS);
-					$sender->getInventory()->addItem($item);
-					$item = Item::get(Item::CHAIN_BOOTS);
-					$sender->getInventory()->addItem($item);
-				}else{
-					$sender->sendMessage("This kit is only for players with Lapis Rank!");
-				}
-				break;
-			}
+	/**
+	* @param PlayerRespawnEvent $event
+	* @priority MONITOR
+	*/
+	public function onRespawn(PlayerRespawnEvent $event) {
+		$player = $event->getPlayer();
+		if ($event->getPlayer()->hasPermission("rank.diamond")){
+			$player->getInventory()->setHelmet(Item::get(Item::DIAMOND_HELMET));
+			$player->getInventory()->setChestplate(Item::get(Item::DIAMOND_CHESTPLATE));
+			$player->getInventory()->setLeggings(Item::get(Item::DIAMOND_LEGGINGS));
+			$player->getInventory()->setBoots(Item::get(Item::DIAMOND_BOOTS));
+			$player->getInventory()->sendArmorContents($player);
+			$player->getInventory()->addItem(Item::get(Item::DIAMOND_SWORD));
+			$player->getInventory()->addItem(Item::get(Item::BREAD, 0, 5));
+			$player->getInventory()->sendContents($player);
+		}elseif ($event->getPlayer()->hasPermission("rank.gold")){
+			$player->getInventory()->setHelmet(Item::get(Item::IRON_HELMET));
+			$player->getInventory()->setChestplate(Item::get(Item::IRON_CHESTPLATE));
+			$player->getInventory()->setLeggings(Item::get(Item::IRON_LEGGINGS));
+			$player->getInventory()->setBoots(Item::get(Item::IRON_BOOTS));
+			$player->getInventory()->sendArmorContents($player);
+			$player->getInventory()->addItem(Item::get(Item::IRON_SWORD));
+			$player->getInventory()->addItem(Item::get(Item::BREAD, 0, 5));
+			$player->getInventory()->sendContents($player);
+		}elseif ($event->getPlayer()->hasPermission("rank.lapis")){
+			$player->getInventory()->setHelmet(Item::get(Item::CHAIN_HELMET));
+			$player->getInventory()->setChestplate(Item::get(Item::CHAIN_CHESTPLATE));
+			$player->getInventory()->setLeggings(Item::get(Item::CHAIN_LEGGINGS));
+			$player->getInventory()->setBoots(Item::get(Item::CHAIN_BOOTS));
+		  $player->getInventory()->sendArmorContents($player);
+			$player->getInventory()->addItem(Item::get(Item::STONE_SWORD));
+			$player->getInventory()->addItem(Item::get(Item::BREAD, 0, 5));
+			$player->getInventory()->sendContents($player);
+		}else{
+			$player->getInventory()->setHelmet(Item::get(Item::LEATHER_HELMET));
+			$player->getInventory()->setChestplate(Item::get(Item::LEATHER_CHESTPLATE));
+			$player->getInventory()->setLeggings(Item::get(Item::LEATHER_LEGGINGS));
+			$player->getInventory()->setBoots(Item::get(Item::LEATHER_BOOTS));
+			$player->getInventory()->sendArmorContents($player);
+			$player->getInventory()->addItem(Item::get(Item::WOODEN_SWORD));
+			$player->getInventory()->addItem(Item::get(Item::BREAD, 0, 5));
+			$player->getInventory()->sendContents($player);
 		}
 	}
+}
