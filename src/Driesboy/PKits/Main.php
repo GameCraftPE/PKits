@@ -11,10 +11,12 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\item\Item;
 use pocketmine\event\Listener;
 use onebone\economyapi\EconomyAPI;
+use Driesboy\PKits\Task;
 
 class Main extends PluginBase implements Listener{
 
 	public function onEnable() {
+		$this->getServer()->getScheduler()->scheduleRepeatingTask(new Task($this), 20);
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
