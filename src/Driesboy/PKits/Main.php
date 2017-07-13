@@ -54,9 +54,9 @@ class Main extends PluginBase implements Listener{
 			$player->getInventory()->addItem(Item::get(Item::BREAD, 0, 5));
 			$player->getInventory()->sendContents($player);
 		}else{
-			$player->getInventory()->setHelmet(Item::get(Item::LEATHER_HELMET));
-			$player->getInventory()->setChestplate(Item::get(Item::LEATHER_CHESTPLATE));
-			$player->getInventory()->setLeggings(Item::get(Item::LEATHER_LEGGINGS));
+			$player->getInventory()->setHelmet(Item::get(Item::LEATHER_CAP));
+			$player->getInventory()->setChestplate(Item::get(Item::LEATHER_TUNIC));
+			$player->getInventory()->setLeggings(Item::get(Item::LEATHER_PANTS));
 			$player->getInventory()->setBoots(Item::get(Item::LEATHER_BOOTS));
 			$player->getInventory()->sendArmorContents($player);
 			$player->getInventory()->addItem(Item::get(Item::WOODEN_SWORD));
