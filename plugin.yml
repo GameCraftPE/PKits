@@ -1,7 +1,7 @@
 name: PKits
 main: Driesboy\PKits\Main
 version: 1.0
-api: [3.0.0-ALPHA4, 3.0.0-ALPHA5]
+api: [3.0.0-ALPHA7]
 auther: Driesboy
 description: "PvP Extendsion"
 commands:

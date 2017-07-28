@@ -14,7 +14,7 @@ class Task extends PluginTask{
 		parent::__construct($plugin);
 	}
 
-	public function onRun($tick){
+	public function onRun(int $tick){
 		$pl = $this->plugin->getServer()->getOnlinePlayers();
 		foreach($pl as $p){
 			if(!$p->getInventory()->getItemInHand()->hasEnchantments()){
