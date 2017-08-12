@@ -12,6 +12,8 @@ use pocketmine\item\Item;
 use pocketmine\event\Listener;
 use onebone\economyapi\EconomyAPI;
 use Driesboy\PKits\Task;
+use pocketmine\level\particle\DustParticle;
+
 
 class Main extends PluginBase implements Listener{
 
@@ -19,7 +21,20 @@ class Main extends PluginBase implements Listener{
 		$this->getServer()->getScheduler()->scheduleRepeatingTask(new Task($this), 20);
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
-
+	public function onMove(PlayerMoveEvent $event){
+		if($event->getPlayer()->hasPermission("rank.lapis")){
+			$pos = $event->getFrom();
+			$red = new DustParticle($pos->add(0, 2.5), 252, 17, 17);
+			$orange = new DustParticle($pos->add(0, 2.1), 252, 135, 17);
+			$yellow = new DustParticle($pos->add(0, 1.7), 252, 252, 17);
+			$green = new DustParticle($pos->add(0, 1.3), 17, 252, 17);
+			$lblue = new DustParticle($pos->add(0, 0.9), 94, 94, 252);
+			$dblue = new DustParticle($pos->add(0, 0.5), 17, 17, 252);
+			foreach ([$red, $orange, $yellow, $green, $lblue, $dblue] as $particle) {
+				$pos->getLevel()->addParticle($particle);
+			}
+		}
+	}
 	/**
 	* @param PlayerRespawnEvent $event
 	* @priority MONITOR
@@ -49,7 +64,7 @@ class Main extends PluginBase implements Listener{
 			$player->getInventory()->setChestplate(Item::get(Item::CHAIN_CHESTPLATE));
 			$player->getInventory()->setLeggings(Item::get(Item::CHAIN_LEGGINGS));
 			$player->getInventory()->setBoots(Item::get(Item::CHAIN_BOOTS));
-		  $player->getInventory()->sendArmorContents($player);
+			$player->getInventory()->sendArmorContents($player);
 			$player->getInventory()->addItem(Item::get(Item::STONE_SWORD));
 			$player->getInventory()->addItem(Item::get(Item::BREAD, 0, 5));
 			$player->getInventory()->sendContents($player);
