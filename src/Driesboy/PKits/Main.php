@@ -11,13 +11,12 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\item\Item;
 use pocketmine\event\Listener;
 use onebone\economyapi\EconomyAPI;
-use Driesboy\PKits\Task;
-use Driesboy\PKits\ClearLagg;
 
 class Main extends PluginBase implements Listener{
 
 	public function onEnable() {
 		$this->getServer()->getScheduler()->scheduleRepeatingTask(new Task($this), 20);
+		$this->getServer()->getScheduler()->scheduleRepeatingTask(new ParticleTask($this), 0.001);
 		$this->getServer()->getScheduler()->scheduleRepeatingTask(new ClearLagg($this), 1000);
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
