@@ -27,13 +27,15 @@ class ParticleTask extends PluginTask{
     foreach($this->plugin->getServer()->getOnlinePlayers() as $p) {
       if($p->getLevel()->getName() === $this->plugin->getServer()->getDefaultLevel()->getName()){
         if($p->hasPermission("rank.lapis")) {
-          $x = (cos(deg2rad($this->degrees)) * 0.6) + $p->x;
-          $z = (sin(deg2rad($this->degrees)) * 0.6) + $p->z;
-          $p->getLevel()->addParticle(new FlameParticle(new Vector3($x, $p->y + 2.2, $z)));
-          if($this->degrees === 360) {
-            $this->degrees = 0;
-          } else {
-            $this->degrees += 6;
+          if(!$p->isSpectator()){
+            $x = (cos(deg2rad($this->degrees)) * 0.6) + $p->x;
+            $z = (sin(deg2rad($this->degrees)) * 0.6) + $p->z;
+            $p->getLevel()->addParticle(new FlameParticle(new Vector3($x, $p->y + 2.2, $z)));
+            if($this->degrees === 360) {
+              $this->degrees = 0;
+            } else {
+              $this->degrees += 6;
+            }
           }
         }
       }
